@@ -6,6 +6,9 @@ import com.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("api/v1/user")
@@ -19,6 +22,14 @@ public class UserController {
     {
         String id = userService.addUser(userSaveDTO);
         return id;
+    }
+
+
+    @GetMapping(path = "/getAllUser")
+    public List<UserDTO> getAllUser()
+    {
+        List<UserDTO>allUsers = userService.getAllUser();
+        return allUsers;
     }
 
 }
