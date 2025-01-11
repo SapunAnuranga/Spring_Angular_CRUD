@@ -2,6 +2,7 @@ package com.backend.Controller;
 
 import com.backend.DTO.UserDTO;
 import com.backend.DTO.UserSaveDTO;
+import com.backend.DTO.UserUpdateDTO;
 import com.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,5 +32,13 @@ public class UserController {
         List<UserDTO>allUsers = userService.getAllUser();
         return allUsers;
     }
+
+
+    @PostMapping(path = "/update")
+    public String updateUser(@RequestBody UserUpdateDTO userUpdateDTO)
+    {
+        return userService.updateUser(userUpdateDTO);
+    }
+
 
 }

@@ -2,9 +2,11 @@ package com.backend.Service;
 
 import com.backend.DTO.UserDTO;
 import com.backend.DTO.UserSaveDTO;
+import com.backend.DTO.UserUpdateDTO;
 import com.backend.Model.User;
 import com.backend.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -42,4 +44,26 @@ public class UserServiceIMPL implements UserService {
         }
         return userDTOList;
     }
+
+
+    @Override
+    public String updateUser(UserUpdateDTO userUpdateDTO) {
+
+        if (userRepo.existsById(userUpdateDTO.getUserId())) {
+
+            User user = userRepo.getById(userUpdateDTO.getUserId());
+
+            user.setUserName(userUpdateDTO.getUserName());
+            user.setUserAddress(userUpdateDTO.getUserAddress());
+            user.setMobile(userUpdateDTO.getMobile());
+            userRepo.save(user);
+
+            return "updated successfully.";
+        }
+        else
+        {
+            return "Error: User Id not found.";
+        }
+    }
+
 }
